@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-api",
+      "type": "shell",
+      "command": "dotnet clean src/WebApi/WebApi.csproj && dotnet build src/WebApi/WebApi.csproj",
+      "workingDirectory": "${workspaceFolder}",
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "build sln",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${workspaceFolder}/WebApi.sln"],
+      "problemMatcher": {
+        "owner": "csharp",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^(.*\\.cs)\\((\\d+),(\\d+)\\):\\s+(error|warning)\\s+(\\w+):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "code": 5,
+          "message": 6
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    }
+  ]
+}
